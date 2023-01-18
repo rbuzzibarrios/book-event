@@ -13,7 +13,10 @@
           <div class="text-center">
             <v-rating model-value="3"></v-rating>
           </div>
-          <div class="text-center">
+          <div class="text-center text-h5">
+            <div class="text-center">$3.00</div>
+          </div>
+          <div class="text-center mt-3">
             <v-btn color="orange">
               Comprar
             </v-btn>
