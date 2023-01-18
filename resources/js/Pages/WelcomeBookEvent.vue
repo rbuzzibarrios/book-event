@@ -1,19 +1,21 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import SearchEventForm from '@/Components/SearchEventForm.vue';
-import { defineComponent } from 'vue';
+import { ref } from 'vue';
 import EventsList from '@/Components/EventsList.vue';
+import axios from 'axios';
 
-defineProps({
-  // canLogin: Boolean,
-  // canRegister: Boolean,
-  // laravelVersion: String,
-  // phpVersion: String,
-  // events: Array<Object>,
+const props = defineProps({
+  events: Array,
 });
+
+const filteredEvents = ref(props.events)
+
+const search = async (values) => {
+  const { data: { events } } = await axios.post('events', values);
+
+  filteredEvents.value = events;
+}
 
 </script>
 
@@ -29,17 +31,16 @@ defineProps({
           </v-col>
         </v-row>
         <v-row>
-          <SearchEventForm></SearchEventForm>
+          <SearchEventForm @submit="search"></SearchEventForm>
         </v-row>
       </v-container>
     </template>
     <v-container>
       <v-row>
         <v-col>
-        <EventsList></EventsList>
+        <EventsList :events="filteredEvents"></EventsList>
         </v-col>
       </v-row>
     </v-container>
   </GuestLayout>
-
 </template>

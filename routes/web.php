@@ -27,6 +27,7 @@ Route::get('/welcome-laravel', function () {
 });
 
 Route::get('/', [ListActivityController::class, 'index'])->name('home.index');
+Route::post('/events', [ListActivityController::class, 'search'])->name('search.event');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

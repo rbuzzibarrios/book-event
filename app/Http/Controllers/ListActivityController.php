@@ -12,10 +12,20 @@ class ListActivityController extends Controller
     {
     }
 
-    public function index(FilterActivityRequest $request): Response
+    public function index(): Response
     {
-        $activities = $this->repository->getAvailable($request->validated('date'));
+        $activities = $this->repository->search()->get();
 
         return inertia('WelcomeBookEvent', ['events' => $activities]);
+    }
+
+    public function search(FilterActivityRequest $request)
+    {
+        $activities = $this->repository
+            ->search(['*'], $with = [], $filters = [], ['rating' => 'desc'])
+            ->available($request->validated('date'))
+            ->get();
+
+        return \response(['events' => $activities]);
     }
 }

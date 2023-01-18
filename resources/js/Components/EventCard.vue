@@ -1,5 +1,16 @@
 <script setup>
 
+import { computed } from 'vue';
+
+const props = defineProps({
+  activity: Object
+});
+
+const shortEventTitle = computed(
+    () => {
+      return props.activity.title.length > 24 ? props.activity.title.substr(0, 24) + "..." : props.activity.title;
+    }
+);
 </script>
 
 <template>
@@ -8,13 +19,20 @@
       <v-row>
         <v-col align-self="center">
           <div class="text-center text-h5">
-            <div class="text-center">Visita al delfinario</div>
+            <div class="text-center"
+            >
+              {{ shortEventTitle }}
+            </div>
+
+            <v-tooltip activator="parent" location="top">
+              {{ activity.title }}
+            </v-tooltip>
           </div>
           <div class="text-center">
-            <v-rating model-value="3"></v-rating>
+            <v-rating :model-value="activity.rating"></v-rating>
           </div>
           <div class="text-center text-h5">
-            <div class="text-center">$3.00</div>
+            <div class="text-center">${{ activity.price }}</div>
           </div>
           <div class="text-center mt-3">
             <v-btn color="orange">
