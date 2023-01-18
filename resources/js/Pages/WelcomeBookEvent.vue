@@ -8,10 +8,11 @@ import { defineComponent } from 'vue';
 import EventsList from '@/Components/EventsList.vue';
 
 defineProps({
-  canLogin: Boolean,
-  canRegister: Boolean,
-  laravelVersion: String,
-  phpVersion: String,
+  // canLogin: Boolean,
+  // canRegister: Boolean,
+  // laravelVersion: String,
+  // phpVersion: String,
+  // events: Array<Object>,
 });
 
 </script>

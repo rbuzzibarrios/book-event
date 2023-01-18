@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListActivityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +26,7 @@ Route::get('/welcome-laravel', function () {
     ]);
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [ListActivityController::class, 'index'])->name('home.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

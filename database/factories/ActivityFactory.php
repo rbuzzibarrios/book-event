@@ -22,9 +22,10 @@ class ActivityFactory extends Factory
         return [
             'title'       => $this->faker->text(rand(20, 64)),
             'description' => $this->faker->realText(),
-            'start_at'    => $this->faker->dateTimeBetween('-2 days', '+5 days'),
-            'end_at'      => $this->faker->dateTimeBetween('+7 days', '+20 days'),
-            'rating'      => $this->faker->numberBetween(0,5),
+            'price'       => $this->faker->randomFloat(2, 1, 500),
+            'start_date'  => $this->faker->dateTimeBetween('-2 days', '+5 days'),
+            'end_date'    => $this->faker->dateTimeBetween('+7 days', '+20 days'),
+            'rating'      => $this->faker->numberBetween(0, 5),
         ];
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title', 64);
             $table->text('description')->nullable();
-            $table->timestamp('start_at');
-            $table->timestamp('end_at');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->unsignedFloat('price')->default(0);
             $table->unsignedMediumInteger('rating')->default(0);
             $table->timestamps();
