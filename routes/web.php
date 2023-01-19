@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateBookingController;
 use App\Http\Controllers\ListActivityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -26,8 +27,9 @@ Route::get('/welcome-laravel', function () {
     ]);
 });
 
-Route::get('/', [ListActivityController::class, 'index'])->name('home.index');
+Route::get('/', [ListActivityController::class, 'index'])->name('index.event');
 Route::post('/events', [ListActivityController::class, 'search'])->name('search.event');
+Route::post('/book', [CreateBookingController::class, '__invoke'])->name('booking.event');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -4,6 +4,7 @@ namespace App\Repositories\Concretes;
 
 use App\Repositories\Interfaces\SharedRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class SharedRepository implements SharedRepositoryInterface
@@ -26,6 +27,17 @@ abstract class SharedRepository implements SharedRepositoryInterface
         return $this->model;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function get(): Collection
+    {
+        return $this->model->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function create(array $data): Model
     {
         return $this->model->create($data);

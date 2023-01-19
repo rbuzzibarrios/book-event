@@ -1,18 +1,34 @@
 <script setup>
 
 import Datepicker from 'vue3-datepicker';
-import { ref } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { format } from 'date-fns';
 
 const emit = defineEmits(['submit']);
 
-const date = ref(new Date());
+const searchData = inject("searchData");
+const date = ref(searchData.value.activity_date);
+const quantityPeople = ref(searchData.value.quantity_people)
 
 const onSubmit = () => {
   emit('submit', {
-    date: format(date.value, 'yyyy-MM-dd')
+    date: format(searchData.value.activity_date, 'yyyy-MM-dd')
   })
 }
+
+const onChangeDate = (value) => {
+  searchData.value.activity_date = value
+}
+
+const onChangeQuantityPeople = (value) => {
+  searchData.value.quantity_people = value
+}
+
+watch(() => searchData.value.activity_date, (value) => {
+  console.log('watch(() => searchData.activity_date', value);
+})
+
+
 
 </script>
 
@@ -24,30 +40,31 @@ const onSubmit = () => {
           <v-container>
             <v-row>
               <v-col cols="5">
-                <datepicker
-                    input-format="dd-MM-yyyy"
+                <Datepicker
                     v-model="date"
+                    input-format="dd-MM-yyyy"
+                    placeholder="Fecha de Actividad"
                     class="v-field v-field--variant-solo bg-white w-100 h-100"
+                    @update:modelValue="onChangeDate"
                 >
-                </datepicker>
+                </Datepicker>
               </v-col>
               <v-col cols="5">
                 <v-text-field
+                    v-model="quantityPeople"
                     label="Número de personas"
                     type="number"
                     prepend-inner-icon="mdi-account-group"
                     variant="solo"
+                    @update:modelValue="onChangeQuantityPeople"
                 ></v-text-field>
               </v-col>
               <v-col class="m-2">
                 <v-btn color="primary" type="submit">
                   Buscar
                 </v-btn>
-
               </v-col>
             </v-row>
-
-
           </v-container>
         </v-form>
       </v-col>

@@ -14,7 +14,7 @@ class ListActivityController extends Controller
 
     public function index(): Response
     {
-        $activities = $this->repository->search()->get();
+        $activities = $this->repository->get();
 
         return inertia('WelcomeBookEvent', ['events' => $activities]);
     }

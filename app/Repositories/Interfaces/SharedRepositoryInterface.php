@@ -12,11 +12,17 @@ interface SharedRepositoryInterface
      * @return Model
      */
     public function getModel(): Model;
+
     /**
      * @param array $data
      * @return Model
      */
     public function create(array $data): Model;
+
+    /**
+     * @return Collection
+     */
+    public function get(): Collection;
 
     /**
      * @param int $id

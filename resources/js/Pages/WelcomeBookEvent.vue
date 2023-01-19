@@ -1,7 +1,8 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { Head } from '@inertiajs/vue3';
 import SearchEventForm from '@/Components/SearchEventForm.vue';
-import { ref } from 'vue';
+import { provide, ref, shallowRef } from 'vue';
 import EventsList from '@/Components/EventsList.vue';
 import axios from 'axios';
 
@@ -9,13 +10,20 @@ const props = defineProps({
   events: Array,
 });
 
-const filteredEvents = ref(props.events)
+const filteredEvents = ref(props.events);
+
+const searchData = shallowRef({
+  activity_date: null,
+  quantity_people: 1,
+});
+
+provide("searchData", searchData);
 
 const search = async (values) => {
   const { data: { events } } = await axios.post('events', values);
 
   filteredEvents.value = events;
-}
+};
 
 </script>
 
@@ -27,7 +35,9 @@ const search = async (values) => {
         <v-row justify="center">
           <v-col class="justify-center" align="justify">
             <div class="text-h3 text-white text-center mt-10"> Vida a tu alma</div>
-            <div class="text-white text-center font-weight-thin mt-2"> Pensando en ti, participa en nuestras actividades...</div>
+            <div class="text-white text-center font-weight-thin mt-2"> Pensando en ti, participa en nuestras
+              actividades...
+            </div>
           </v-col>
         </v-row>
         <v-row>
