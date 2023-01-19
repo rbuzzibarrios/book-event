@@ -8,27 +8,21 @@ const emit = defineEmits(['submit']);
 
 const searchData = inject("searchData");
 const date = ref(searchData.value.activity_date);
-const quantityPeople = ref(searchData.value.quantity_people)
+const quantityPeople = ref(searchData.value.quantity_people);
 
 const onSubmit = () => {
   emit('submit', {
     date: format(searchData.value.activity_date, 'yyyy-MM-dd')
-  })
-}
+  });
+};
 
 const onChangeDate = (value) => {
-  searchData.value.activity_date = value
-}
+  searchData.value.activity_date = value;
+};
 
 const onChangeQuantityPeople = (value) => {
-  searchData.value.quantity_people = value
-}
-
-watch(() => searchData.value.activity_date, (value) => {
-  console.log('watch(() => searchData.activity_date', value);
-})
-
-
+  searchData.value.quantity_people = value;
+};
 
 </script>
 

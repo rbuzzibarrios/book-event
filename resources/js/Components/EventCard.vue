@@ -1,6 +1,6 @@
 <script setup>
 
-import { computed, inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { format } from 'date-fns';
 
 const props = defineProps({
@@ -15,18 +15,35 @@ const shortEventTitle = computed(
 
 const searchData = inject("searchData");
 
+const showDialogMessage = ref(false);
+
 const book = async () => {
-  const date = searchData.value?.activity_date ? format(searchData.value?.activity_date, "yyyy-MM-dd") : null
+  const date = searchData.value?.activity_date ? format(searchData.value?.activity_date, "yyyy-MM-dd") : null;
 
   const { data } = await axios.post('book', {
     date,
     activity: props.activity?.id,
     quantity_people: searchData.value.quantity_people,
   });
-}
+
+  console.log(data);
+
+  showDialogMessage.value = true;
+};
 </script>
 
 <template>
+  <v-dialog width="400" v-model="showDialogMessage" persistent>
+    <v-card>
+      <v-card-text class="justify-center text-center">
+        La reserva se ha creado satisfactoriamente.
+      </v-card-text>
+      <v-card-actions class="justify-center">
+        <v-btn color="primary" @click="showDialogMessage = false">Aceptar</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
   <v-card>
     <v-card-text>
       <v-row>
