@@ -15,6 +15,6 @@ class CreateBookingController extends Controller
     {
         $this->repository->create($request->validated());
 
-        return to_route('index.event');
+        return to_route('index.event', [], 201);
     }
 }

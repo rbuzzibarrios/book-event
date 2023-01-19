@@ -14,7 +14,7 @@ class FilterActivityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'sometimes|date_format:Y-m-d'
+            'date' => 'required|date_format:Y-m-d'
         ];
     }
 }

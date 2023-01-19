@@ -11,8 +11,10 @@ const date = ref(searchData.value.activity_date);
 const quantityPeople = ref(searchData.value.quantity_people);
 
 const onSubmit = () => {
+  const date = searchData.value?.activity_date ? format(searchData.value?.activity_date, "yyyy-MM-dd") : null;
+
   emit('submit', {
-    date: format(searchData.value.activity_date, 'yyyy-MM-dd')
+    date
   });
 };
 
