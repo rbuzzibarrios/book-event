@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -21,6 +20,10 @@ return new class extends Migration
             $table->timestamp('end_date');
             $table->unsignedFloat('price')->default(0);
             $table->unsignedMediumInteger('rating')->default(0);
+            $table->foreignId('activity_related_of_id')->nullable()
+                ->constrained('activities')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
